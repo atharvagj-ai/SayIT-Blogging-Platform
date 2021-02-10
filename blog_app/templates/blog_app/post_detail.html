@@ -2,7 +2,7 @@
 {% block content %}
     <div class="card text-left">
         <div class="card-header">
-            By {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}           
+            By <a href="{% url 'user-posts' post.author.username %}"> {{ post.author }}</a>  on {{ post.date_posted|date:"F d, Y" }}           
         </div>
         <div class="card-body media content-section">
                 <div>
