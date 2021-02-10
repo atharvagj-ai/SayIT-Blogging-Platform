@@ -1,0 +1,33 @@
+{% extends "blog_app/base.html" %}
+{% block content %}
+    <div class="card text-left">
+        <div class="card-header">
+            By {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}           
+        </div>
+        <div class="card-body media content-section">
+                <div>
+                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                </div>
+                <div class="media-body col-sm-11">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text article-content">{{ post.content }}</p>
+                </div>
+                {% if object.author == user %}
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'post-update' object.id %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'post-delete' object.id %}">Delete</a> 
+                        </div>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="buttons">
+        <div class="form-group">
+            <button class="btn btn-primary">Like</button>
+            <button class="btn btn-secondary">Disike</button>
+        </div>
+    </div>
+{%  endblock content %}
