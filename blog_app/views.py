@@ -21,16 +21,21 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 4
 
-class UserPostListView(ListView):
+class UserPostListView(LoginRequiredMixin,UserPassesTestMixin,ListView):
     model = Post
     template_name='blog_app/user_posts.html' # <app>/<model>_<viewtype>
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 4
 
-    def get_query_set(self):
+    def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
+
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
 
 class PostDetailView(DetailView):
     model = Post

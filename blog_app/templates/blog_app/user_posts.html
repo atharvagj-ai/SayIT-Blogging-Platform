@@ -1,6 +1,6 @@
 {% extends "blog_app/base.html" %}
 {% block content %}
-    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count}})</h1>
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
     <div class="form-group">
         <a class="btn btn-primary" href="{% url 'post-create' %}">Create Post</a>
         <a class="btn btn-secondary" href="{% url 'profile' %}">Update Profile</a>
